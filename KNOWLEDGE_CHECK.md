@@ -24,7 +24,7 @@ You submitted your entire job array with one `sbatch` command, but Slurm schedul
 
 **Your answer:** Did all tasks in the array start at the same time? Was the elapsed time identical for every task? Explain why or why not.
 
-...
+No, they started in batches. The batch size varied, from 4 to around 7ish. This contributed to elapsed time not being identical, and thus caused variations, from 14 to 20ish seconds. The main likely contributor was book size in each batch.
 
 ## 3. Slurm: did my job use what it asked for?
 
@@ -36,5 +36,5 @@ Suppose your next job array has 1,000 books instead of 101. Before you submit it
 
 **Your answer:** How much memory and time did the task use, compared with what your script asked for? What would you change in your script, and why?
 
-...
+It used 1.42 GB of memory, compared to the 16 gb requested. It took 19 seconds, compared to requested 5 minutes. For 1000 books, i would change the time to be about 2.5 minutes, a little more than 10x the 101 books time used, as a buffer. I would do this because the task doesn't likely need 5 minutes, but it also might need a buffer for larger books. A buffer would prevent over requesting, reducing traffic in queue. I'd also decrease RAM to maybe around 8 GB, since the highest task used 2.6gb, so 6gb gives a wider margin. This would save unused RAM for others too.
 
